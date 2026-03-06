@@ -1,0 +1,931 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#2d1854" />
+  <title>Apex Logistics | Premium Global Freight &amp; Supply Chain</title>
+  <meta name="description" content="Apex Logistics delivers world-class freight, warehousing, and supply chain solutions across 150+ countries. Trusted by Fortune 500 companies worldwide." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    /* ── Reset & Base ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #1a0e2e;
+      --fg: #f0e8d8;
+      --card: #241540;
+      --card-fg: #f0e8d8;
+      --primary: #6b2fa0;
+      --primary-fg: #faf5e8;
+      --accent: #d4a843;
+      --accent-fg: #1a0e2e;
+      --muted: #2a1848;
+      --muted-fg: #a898c0;
+      --border: #3a2660;
+      --radius: 0.625rem;
+      --font-body: 'DM Sans', sans-serif;
+      --font-heading: 'Space Grotesk', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font-body);
+      background: var(--bg);
+      color: var(--fg);
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+    img { display: block; max-width: 100%; height: auto; }
+    a { color: inherit; text-decoration: none; }
+    button { font-family: inherit; cursor: pointer; border: none; }
+
+    /* ── Utilities ── */
+    .container { max-width: 1280px; margin: 0 auto; padding-left: 1.5rem; padding-right: 1.5rem; }
+    .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
+    .text-balance { text-wrap: balance; }
+
+    .btn {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      padding: 0.75rem 2rem; border-radius: var(--radius); font-weight: 600; font-size: 0.875rem;
+      transition: background 0.2s, opacity 0.2s;
+    }
+    .btn-accent { background: var(--accent); color: var(--accent-fg); }
+    .btn-accent:hover { opacity: 0.9; }
+    .btn-outline { background: transparent; color: var(--fg); border: 1px solid var(--border); }
+    .btn-outline:hover { background: var(--muted); }
+    .btn-ghost { background: transparent; color: var(--muted-fg); }
+    .btn-ghost:hover { color: var(--fg); }
+    .btn-lg { padding: 0.875rem 2.5rem; font-size: 1rem; }
+
+    .section-label {
+      font-size: 0.75rem; font-weight: 600; text-transform: uppercase;
+      letter-spacing: 0.15em; color: var(--accent);
+    }
+    .section-title {
+      font-family: var(--font-heading); font-size: 2rem; font-weight: 700;
+      color: var(--fg); margin-top: 0.75rem;
+    }
+    .section-desc {
+      font-size: 1.125rem; line-height: 1.6; color: var(--muted-fg); margin-top: 1rem;
+    }
+
+    /* ── Navbar ── */
+    .navbar {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 50;
+      background: rgba(26, 14, 46, 0.8); backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .navbar-inner {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1rem 1.5rem; max-width: 1280px; margin: 0 auto;
+    }
+    .navbar-brand { display: flex; align-items: center; gap: 0.5rem; }
+    .navbar-logo {
+      width: 2.5rem; height: 2.5rem; display: flex; align-items: center; justify-content: center;
+      background: var(--primary); border-radius: 0.5rem;
+    }
+    .navbar-logo svg { width: 1.25rem; height: 1.25rem; color: var(--primary-fg); }
+    .navbar-brand-text { font-family: var(--font-heading); font-size: 1.25rem; font-weight: 700; letter-spacing: -0.02em; }
+    .navbar-links { display: none; align-items: center; gap: 2rem; list-style: none; }
+    .navbar-links a { font-size: 0.875rem; font-weight: 500; color: var(--muted-fg); transition: color 0.2s; }
+    .navbar-links a:hover { color: var(--accent); }
+    .navbar-actions { display: none; align-items: center; gap: 0.75rem; }
+    .hamburger { display: flex; align-items: center; justify-content: center; background: none; color: var(--fg); padding: 0.25rem; }
+    .hamburger svg { width: 1.5rem; height: 1.5rem; }
+
+    .mobile-menu {
+      display: none; flex-direction: column; gap: 1rem;
+      padding: 1rem 1.5rem; border-top: 1px solid var(--border); background: var(--bg);
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a { font-size: 0.875rem; font-weight: 500; color: var(--muted-fg); }
+    .mobile-menu a:hover { color: var(--accent); }
+    .mobile-menu-actions { display: flex; flex-direction: column; gap: 0.5rem; padding-top: 1rem; border-top: 1px solid var(--border); }
+
+    @media (min-width: 768px) {
+      .navbar-links { display: flex; }
+      .navbar-actions { display: flex; }
+      .hamburger { display: none; }
+    }
+
+    /* ── Hero ── */
+    .hero {
+      position: relative; min-height: 100vh; display: flex; align-items: center;
+      overflow: hidden; padding-top: 5rem;
+    }
+    .hero-bg {
+      position: absolute; inset: 0;
+    }
+    .hero-bg img { width: 100%; height: 100%; object-fit: cover; }
+    .hero-overlay { position: absolute; inset: 0; background: rgba(26, 14, 46, 0.88); }
+    .hero-glow {
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse at top right, rgba(107, 47, 160, 0.15), transparent 60%);
+    }
+    .hero-content { position: relative; z-index: 1; padding: 6rem 0; }
+    .hero-grid { display: grid; gap: 3rem; align-items: center; }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      border: 1px solid var(--border); background: rgba(42, 24, 72, 0.5);
+      border-radius: 999px; padding: 0.375rem 1rem; font-size: 0.75rem; font-weight: 500; color: var(--accent);
+    }
+    .hero-badge-dot { width: 0.375rem; height: 0.375rem; border-radius: 50%; background: var(--accent); }
+    .hero-heading {
+      font-family: var(--font-heading); font-size: 2.5rem; font-weight: 700;
+      line-height: 1.1; letter-spacing: -0.02em; color: var(--fg); margin-top: 2rem;
+    }
+    .hero-heading span { color: var(--accent); }
+    .hero-description { max-width: 32rem; font-size: 1.125rem; line-height: 1.6; color: var(--muted-fg); margin-top: 2rem; }
+    .hero-buttons { display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 2rem; }
+    .hero-mini-stats { display: flex; align-items: center; gap: 2rem; margin-top: 2rem; }
+    .hero-mini-stat-value { font-family: var(--font-heading); font-size: 1.5rem; font-weight: 700; color: var(--accent); }
+    .hero-mini-stat-label { font-size: 0.75rem; color: var(--muted-fg); }
+    .hero-divider { width: 1px; height: 2rem; background: var(--border); }
+    .hero-image-wrapper {
+      display: none; position: relative;
+      border-radius: 1rem; overflow: hidden; border: 1px solid var(--border);
+      box-shadow: 0 25px 50px -12px rgba(107, 47, 160, 0.2);
+    }
+    .hero-image-overlay {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      background: linear-gradient(to top, rgba(26, 14, 46, 0.9), transparent);
+      padding: 1.5rem;
+    }
+    .hero-live { display: flex; align-items: center; gap: 0.75rem; }
+    .hero-live-dot { width: 0.75rem; height: 0.75rem; border-radius: 50%; background: #22c55e; animation: pulse 2s infinite; }
+    .hero-live-text { font-size: 0.875rem; font-weight: 500; }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+
+    @media (min-width: 640px) { .hero-heading { font-size: 3rem; } }
+    @media (min-width: 1024px) {
+      .hero-grid { grid-template-columns: 1fr 1fr; }
+      .hero-heading { font-size: 3.75rem; }
+      .hero-image-wrapper { display: block; }
+    }
+
+    /* ── Stats Bar ── */
+    .stats-bar { border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); background: rgba(42, 24, 72, 0.3); }
+    .stats-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem; padding: 3rem 0; }
+    .stat-value { font-family: var(--font-heading); font-size: 1.875rem; font-weight: 700; color: var(--accent); }
+    .stat-label { font-size: 0.875rem; font-weight: 500; color: var(--fg); margin-top: 0.25rem; }
+    .stat-desc { font-size: 0.75rem; color: var(--muted-fg); }
+    .stat { text-align: center; }
+
+    @media (min-width: 1024px) {
+      .stats-grid { grid-template-columns: repeat(4, 1fr); }
+      .stat-value { font-size: 2.25rem; }
+    }
+
+    /* ── Services ── */
+    .services { padding: 6rem 0; }
+    .services-header { max-width: 42rem; margin: 0 auto; text-align: center; }
+    .services-grid { display: grid; gap: 1.5rem; margin-top: 4rem; }
+    .service-card {
+      border: 1px solid var(--border); background: var(--card); border-radius: 0.75rem;
+      padding: 2rem; transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .service-card:hover { border-color: rgba(107, 47, 160, 0.5); box-shadow: 0 10px 30px rgba(107, 47, 160, 0.05); }
+    .service-icon {
+      width: 3rem; height: 3rem; display: flex; align-items: center; justify-content: center;
+      border-radius: 0.5rem; background: rgba(107, 47, 160, 0.1);
+    }
+    .service-icon svg { width: 1.5rem; height: 1.5rem; color: var(--primary); }
+    .service-title { font-size: 1.125rem; font-weight: 600; color: var(--card-fg); margin-top: 1.25rem; }
+    .service-desc { font-size: 0.875rem; line-height: 1.6; color: var(--muted-fg); margin-top: 0.5rem; }
+
+    @media (min-width: 640px) { .services-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (min-width: 1024px) { .services-grid { grid-template-columns: repeat(3, 1fr); } }
+    @media (min-width: 640px) { .section-title { font-size: 2.25rem; } }
+
+    /* ── About ── */
+    .about { padding: 6rem 0; background: rgba(42, 24, 72, 0.2); }
+    .about-grid { display: grid; gap: 4rem; align-items: center; }
+    .about-image-wrapper { position: relative; }
+    .about-image { border-radius: 1rem; overflow: hidden; border: 1px solid var(--border); }
+    .about-badge {
+      display: none; position: absolute; bottom: -1.5rem; right: -1.5rem;
+      border: 1px solid var(--border); background: var(--card); border-radius: 0.75rem;
+      padding: 1.5rem; box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+    }
+    .about-badge-value { font-family: var(--font-heading); font-size: 1.875rem; font-weight: 700; color: var(--accent); }
+    .about-badge-label { font-size: 0.875rem; color: var(--muted-fg); }
+    .about-content { display: flex; flex-direction: column; gap: 1.5rem; }
+    .about-list { display: flex; flex-direction: column; gap: 1rem; margin-top: 0.5rem; }
+    .about-list-item { display: flex; align-items: flex-start; gap: 0.75rem; }
+    .about-list-item svg { width: 1.25rem; height: 1.25rem; color: var(--accent); flex-shrink: 0; margin-top: 0.125rem; }
+    .about-list-item span { font-size: 0.875rem; color: var(--fg); }
+
+    @media (min-width: 1024px) {
+      .about-grid { grid-template-columns: 1fr 1fr; }
+      .about-badge { display: block; }
+    }
+
+    /* ── Tracking ── */
+    .tracking { padding: 6rem 0; }
+    .tracking-header { max-width: 42rem; margin: 0 auto; text-align: center; }
+    .tracking-form { display: flex; gap: 0.75rem; max-width: 36rem; margin: 3rem auto 0; }
+    .tracking-input-wrapper { position: relative; flex: 1; }
+    .tracking-input-wrapper svg { position: absolute; left: 0.75rem; top: 50%; transform: translateY(-50%); width: 1rem; height: 1rem; color: var(--muted-fg); }
+    .tracking-input {
+      width: 100%; height: 3rem; padding-left: 2.5rem; padding-right: 1rem;
+      background: var(--card); border: 1px solid var(--border); border-radius: var(--radius);
+      color: var(--fg); font-size: 0.875rem; font-family: var(--font-body); outline: none;
+      transition: border-color 0.2s;
+    }
+    .tracking-input::placeholder { color: var(--muted-fg); }
+    .tracking-input:focus { border-color: var(--accent); }
+    .tracking-btn { height: 3rem; padding: 0 1.5rem; }
+
+    .tracking-result {
+      display: none; max-width: 36rem; margin: 2rem auto 0;
+      border: 1px solid var(--border); background: var(--card); border-radius: 0.75rem; padding: 1.5rem;
+    }
+    .tracking-result.visible { display: block; }
+    .tracking-result-header {
+      display: flex; align-items: center; justify-content: space-between;
+      padding-bottom: 1rem; border-bottom: 1px solid var(--border);
+    }
+    .tracking-id-label { font-size: 0.875rem; color: var(--muted-fg); }
+    .tracking-id-value { font-family: var(--font-heading); font-weight: 600; color: var(--fg); }
+    .tracking-status-badge {
+      background: rgba(212, 168, 67, 0.1); color: var(--accent);
+      font-size: 0.75rem; font-weight: 500; padding: 0.25rem 0.75rem; border-radius: 999px;
+    }
+    .tracking-timeline { display: flex; flex-direction: column; gap: 1.5rem; margin-top: 1.5rem; }
+    .tracking-step { display: flex; gap: 1rem; }
+    .tracking-step-indicator { display: flex; flex-direction: column; align-items: center; }
+    .tracking-step-dot {
+      width: 2rem; height: 2rem; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    }
+    .tracking-step-dot.complete { background: var(--accent); color: var(--accent-fg); }
+    .tracking-step-dot.pending { background: var(--card); border: 2px solid var(--primary); color: var(--primary); }
+    .tracking-step-dot svg { width: 1rem; height: 1rem; }
+    .tracking-step-line { width: 2px; flex: 1; margin-top: 0.25rem; }
+    .tracking-step-line.complete { background: var(--accent); }
+    .tracking-step-line.pending { background: var(--border); }
+    .tracking-step-content { padding-bottom: 1.5rem; }
+    .tracking-step-title { font-weight: 500; color: var(--card-fg); }
+    .tracking-step-meta { display: flex; align-items: center; gap: 0.75rem; margin-top: 0.25rem; font-size: 0.75rem; color: var(--muted-fg); }
+    .tracking-step-meta svg { width: 0.75rem; height: 0.75rem; }
+    .tracking-step-meta-item { display: flex; align-items: center; gap: 0.25rem; }
+
+    /* ── Testimonials ── */
+    .testimonials { padding: 6rem 0; background: rgba(42, 24, 72, 0.2); }
+    .testimonials-header { max-width: 42rem; margin: 0 auto; text-align: center; }
+    .testimonials-grid { display: grid; gap: 1.5rem; margin-top: 4rem; }
+    .testimonial-card {
+      display: flex; flex-direction: column; justify-content: space-between;
+      border: 1px solid var(--border); background: var(--card); border-radius: 0.75rem; padding: 2rem;
+    }
+    .testimonial-stars { display: flex; gap: 0.25rem; }
+    .testimonial-stars svg { width: 1rem; height: 1rem; fill: var(--accent); color: var(--accent); }
+    .testimonial-quote { font-size: 0.875rem; line-height: 1.6; color: var(--muted-fg); margin-top: 1.25rem; }
+    .testimonial-footer { border-top: 1px solid var(--border); padding-top: 1.25rem; margin-top: 1.5rem; }
+    .testimonial-author { font-size: 0.875rem; font-weight: 600; color: var(--card-fg); }
+    .testimonial-role { font-size: 0.75rem; color: var(--muted-fg); }
+
+    @media (min-width: 768px) { .testimonials-grid { grid-template-columns: repeat(3, 1fr); } }
+
+    /* ── CTA ── */
+    .cta { padding: 6rem 0; }
+    .cta-card {
+      position: relative; overflow: hidden; border: 1px solid var(--border);
+      background: var(--card); border-radius: 1rem; padding: 3rem;
+    }
+    .cta-glow-1 {
+      position: absolute; top: -6rem; right: -6rem; width: 16rem; height: 16rem;
+      border-radius: 50%; background: rgba(107, 47, 160, 0.1); filter: blur(48px);
+    }
+    .cta-glow-2 {
+      position: absolute; bottom: -6rem; left: -6rem; width: 16rem; height: 16rem;
+      border-radius: 50%; background: rgba(212, 168, 67, 0.1); filter: blur(48px);
+    }
+    .cta-inner { position: relative; max-width: 42rem; margin: 0 auto; text-align: center; }
+    .cta-title { font-family: var(--font-heading); font-size: 2rem; font-weight: 700; color: var(--card-fg); }
+    .cta-desc { font-size: 1.125rem; line-height: 1.6; color: var(--muted-fg); margin-top: 1rem; }
+    .cta-buttons { display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem; margin-top: 2rem; }
+    .cta-note { font-size: 0.75rem; color: var(--muted-fg); margin-top: 1.5rem; }
+
+    @media (min-width: 1024px) {
+      .cta-card { padding: 5rem; }
+      .cta-title { font-size: 2.25rem; }
+    }
+
+    /* ── Footer ── */
+    .footer { border-top: 1px solid var(--border); background: rgba(42, 24, 72, 0.1); }
+    .footer-inner { padding: 4rem 0; }
+    .footer-grid { display: grid; gap: 3rem; }
+    .footer-brand-desc { max-width: 20rem; font-size: 0.875rem; line-height: 1.6; color: var(--muted-fg); margin-top: 1rem; }
+    .footer-col-title { font-size: 0.875rem; font-weight: 600; color: var(--fg); }
+    .footer-col-list { list-style: none; display: flex; flex-direction: column; gap: 0.625rem; margin-top: 1rem; }
+    .footer-col-list a { font-size: 0.875rem; color: var(--muted-fg); transition: color 0.2s; }
+    .footer-col-list a:hover { color: var(--accent); }
+    .footer-bottom {
+      display: flex; flex-direction: column; align-items: center; justify-content: space-between;
+      gap: 1rem; border-top: 1px solid var(--border); padding-top: 2rem; margin-top: 3rem;
+    }
+    .footer-bottom-text { font-size: 0.75rem; color: var(--muted-fg); }
+    .footer-bottom-links { display: flex; gap: 1.5rem; }
+    .footer-bottom-links a { font-size: 0.75rem; color: var(--muted-fg); transition: color 0.2s; }
+    .footer-bottom-links a:hover { color: var(--accent); }
+
+    @media (min-width: 768px) {
+      .footer-grid { grid-template-columns: 2fr 1fr 1fr; }
+      .footer-bottom { flex-direction: row; }
+    }
+    @media (min-width: 1024px) {
+      .footer-grid { grid-template-columns: 2fr 1fr 1fr 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ═══════ NAVBAR ═══════ -->
+  <header class="navbar" role="banner">
+    <nav class="navbar-inner" aria-label="Main navigation">
+      <a href="/" class="navbar-brand" aria-label="Apex Logistics home">
+        <div class="navbar-logo">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16.5 9.4 7.55 4.24"/><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.29 7 12 12 20.71 7"/><line x1="12" x2="12" y1="22" y2="12"/></svg>
+        </div>
+        <span class="navbar-brand-text">APEX</span>
+      </a>
+
+      <ul class="navbar-links">
+        <li><a href="#solutions">Solutions</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#tracking">Tracking</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+
+      <div class="navbar-actions">
+        <button class="btn btn-ghost">Log in</button>
+        <button class="btn btn-accent">Get a Quote</button>
+      </div>
+
+      <button class="hamburger" id="hamburger" aria-label="Toggle navigation menu" aria-expanded="false">
+        <svg id="hamburger-open" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
+        <svg id="hamburger-close" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+      </button>
+    </nav>
+
+    <div class="mobile-menu" id="mobile-menu" role="menu">
+      <a href="#solutions" role="menuitem">Solutions</a>
+      <a href="#services" role="menuitem">Services</a>
+      <a href="#about" role="menuitem">About</a>
+      <a href="#tracking" role="menuitem">Tracking</a>
+      <a href="#contact" role="menuitem">Contact</a>
+      <div class="mobile-menu-actions">
+        <button class="btn btn-ghost" style="justify-content:flex-start">Log in</button>
+        <button class="btn btn-accent">Get a Quote</button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ═══════ HERO ═══════ -->
+    <section class="hero" id="solutions">
+      <div class="hero-bg">
+        <img src="/images/hero-logistics.jpg" alt="Aerial view of a logistics hub at dusk with shipping containers" />
+        <div class="hero-overlay"></div>
+        <div class="hero-glow"></div>
+      </div>
+
+      <div class="hero-content container">
+        <div class="hero-grid">
+          <div>
+            <div class="hero-badge">
+              <span class="hero-badge-dot"></span>
+              Trusted by 2,000+ enterprises worldwide
+            </div>
+
+            <h1 class="hero-heading text-balance">
+              Global logistics, <span>delivered</span> with precision
+            </h1>
+
+            <p class="hero-description">
+              End-to-end freight management, warehousing, and supply chain
+              solutions across 150+ countries. Move faster. Ship smarter.
+            </p>
+
+            <div class="hero-buttons">
+              <button class="btn btn-accent btn-lg">
+                Start Shipping
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+              </button>
+              <button class="btn btn-outline btn-lg">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="6 3 20 12 6 21 6 3"/></svg>
+                Watch Demo
+              </button>
+            </div>
+
+            <div class="hero-mini-stats">
+              <div>
+                <p class="hero-mini-stat-value">150+</p>
+                <p class="hero-mini-stat-label">Countries</p>
+              </div>
+              <div class="hero-divider"></div>
+              <div>
+                <p class="hero-mini-stat-value">99.8%</p>
+                <p class="hero-mini-stat-label">On-Time Rate</p>
+              </div>
+              <div class="hero-divider"></div>
+              <div>
+                <p class="hero-mini-stat-value">24/7</p>
+                <p class="hero-mini-stat-label">Live Support</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="hero-image-wrapper">
+            <img src="/images/warehouse.jpg" alt="Inside a modern automated warehouse facility" />
+            <div class="hero-image-overlay">
+              <div class="hero-live">
+                <div class="hero-live-dot"></div>
+                <span class="hero-live-text">Live: 12,847 packages in transit</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════ STATS BAR ═══════ -->
+    <section class="stats-bar">
+      <div class="container">
+        <div class="stats-grid">
+          <div class="stat">
+            <p class="stat-value">2M+</p>
+            <p class="stat-label">Shipments per year</p>
+            <p class="stat-desc">across all modes</p>
+          </div>
+          <div class="stat">
+            <p class="stat-value">$4.2B</p>
+            <p class="stat-label">Freight managed</p>
+            <p class="stat-desc">annual volume</p>
+          </div>
+          <div class="stat">
+            <p class="stat-value">98.6%</p>
+            <p class="stat-label">Customer retention</p>
+            <p class="stat-desc">year over year</p>
+          </div>
+          <div class="stat">
+            <p class="stat-value">35min</p>
+            <p class="stat-label">Avg. response time</p>
+            <p class="stat-desc">customer support</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════ SERVICES ═══════ -->
+    <section class="services" id="services">
+      <div class="container">
+        <div class="services-header">
+          <p class="section-label">Our Services</p>
+          <h2 class="section-title text-balance">Comprehensive logistics solutions</h2>
+          <p class="section-desc">From origin to destination, we manage every link in your supply chain with precision and care.</p>
+        </div>
+
+        <div class="services-grid">
+          <!-- Freight Forwarding -->
+          <div class="service-card">
+            <div class="service-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 18V6a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2"/><path d="M15 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.624l-3.48-4.35A1 1 0 0 0 13.52 9H14"/><circle cx="17" cy="18" r="2"/><circle cx="7" cy="18" r="2"/></svg>
+            </div>
+            <h3 class="service-title">Freight Forwarding</h3>
+            <p class="service-desc">Full truckload, LTL, and intermodal solutions with real-time tracking across North America, Europe, and Asia-Pacific.</p>
+          </div>
+
+          <!-- Warehousing & Fulfillment -->
+          <div class="service-card">
+            <div class="service-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 8.35V20a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V8.35A2 2 0 0 1 3.26 6.5l8-3.2a2 2 0 0 1 1.48 0l8 3.2A2 2 0 0 1 22 8.35Z"/><path d="M6 18h12"/><path d="M6 14h12"/><path d="M6 10h12"/></svg>
+            </div>
+            <h3 class="service-title">Warehousing &amp; Fulfillment</h3>
+            <p class="service-desc">State-of-the-art facilities with automated inventory management, pick-and-pack, and same-day dispatch capabilities.</p>
+          </div>
+
+          <!-- International Shipping -->
+          <div class="service-card">
+            <div class="service-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>
+            </div>
+            <h3 class="service-title">International Shipping</h3>
+            <p class="service-desc">Ocean and air freight to 150+ countries with full customs brokerage, documentation, and compliance support.</p>
+          </div>
+
+          <!-- Supply Chain Analytics -->
+          <div class="service-card">
+            <div class="service-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v16a2 2 0 0 0 2 2h16"/><path d="M7 16l4-8 4 4 4-12"/></svg>
+            </div>
+            <h3 class="service-title">Supply Chain Analytics</h3>
+            <p class="service-desc">AI-powered visibility platform providing real-time insights, predictive analytics, and cost optimization.</p>
+          </div>
+
+          <!-- Cargo Insurance -->
+          <div class="service-card">
+            <div class="service-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/></svg>
+            </div>
+            <h3 class="service-title">Cargo Insurance</h3>
+            <p class="service-desc">Comprehensive coverage options for all freight types with streamlined claims processing and rapid payouts.</p>
+          </div>
+
+          <!-- Express & Last Mile -->
+          <div class="service-card">
+            <div class="service-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            </div>
+            <h3 class="service-title">Express &amp; Last Mile</h3>
+            <p class="service-desc">Time-critical and white-glove delivery services with guaranteed SLAs and proof-of-delivery documentation.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════ ABOUT ═══════ -->
+    <section class="about" id="about">
+      <div class="container">
+        <div class="about-grid">
+          <div class="about-image-wrapper">
+            <div class="about-image">
+              <img src="/images/fleet.jpg" alt="Fleet of modern trucks at a logistics yard during golden hour" />
+            </div>
+            <div class="about-badge">
+              <p class="about-badge-value">28+</p>
+              <p class="about-badge-label">Years of excellence</p>
+            </div>
+          </div>
+
+          <div class="about-content">
+            <p class="section-label">Why Apex</p>
+            <h2 class="section-title text-balance">Built for enterprises that move the world</h2>
+            <p class="section-desc" style="margin-top:0">
+              Since 1997, Apex Logistics has been the trusted partner for
+              Fortune 500 companies requiring reliable, scalable freight and
+              supply chain management. Our technology-first approach ensures
+              complete visibility from pickup to delivery.
+            </p>
+
+            <div class="about-list">
+              <div class="about-list-item">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg>
+                <span>ISO 9001:2015 &amp; C-TPAT certified operations</span>
+              </div>
+              <div class="about-list-item">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg>
+                <span>Proprietary AI-driven route optimization engine</span>
+              </div>
+              <div class="about-list-item">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg>
+                <span>Carbon-neutral shipping options available</span>
+              </div>
+              <div class="about-list-item">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg>
+                <span>Dedicated account managers for enterprise clients</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════ TRACKING ═══════ -->
+    <section class="tracking" id="tracking">
+      <div class="container">
+        <div class="tracking-header">
+          <p class="section-label">Track &amp; Trace</p>
+          <h2 class="section-title text-balance">Real-time shipment visibility</h2>
+          <p class="section-desc">Enter your tracking ID to get instant updates on your shipment status, location, and estimated delivery time.</p>
+        </div>
+
+        <div class="tracking-form">
+          <div class="tracking-input-wrapper">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+            <input type="text" class="tracking-input" id="tracking-input" placeholder="Enter tracking ID (e.g. APX-2026-84721)" aria-label="Tracking ID" />
+          </div>
+          <button class="btn btn-accent tracking-btn" id="track-btn">Track</button>
+        </div>
+
+        <div class="tracking-result" id="tracking-result">
+          <div class="tracking-result-header">
+            <div>
+              <p class="tracking-id-label">Tracking ID</p>
+              <p class="tracking-id-value">APX-2026-84721</p>
+            </div>
+            <div class="tracking-status-badge">In Transit</div>
+          </div>
+
+          <div class="tracking-timeline">
+            <!-- Step 1 - Complete -->
+            <div class="tracking-step">
+              <div class="tracking-step-indicator">
+                <div class="tracking-step-dot complete">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg>
+                </div>
+                <div class="tracking-step-line complete"></div>
+              </div>
+              <div class="tracking-step-content">
+                <p class="tracking-step-title">Picked Up</p>
+                <div class="tracking-step-meta">
+                  <span class="tracking-step-meta-item">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                    Shanghai, CN
+                  </span>
+                  <span class="tracking-step-meta-item">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                    Feb 22, 10:15 AM
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Step 2 - Complete -->
+            <div class="tracking-step">
+              <div class="tracking-step-indicator">
+                <div class="tracking-step-dot complete">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg>
+                </div>
+                <div class="tracking-step-line complete"></div>
+              </div>
+              <div class="tracking-step-content">
+                <p class="tracking-step-title">In Transit</p>
+                <div class="tracking-step-meta">
+                  <span class="tracking-step-meta-item">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                    Hong Kong, HK
+                  </span>
+                  <span class="tracking-step-meta-item">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                    Feb 23, 3:42 PM
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Step 3 - Complete -->
+            <div class="tracking-step">
+              <div class="tracking-step-indicator">
+                <div class="tracking-step-dot complete">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg>
+                </div>
+                <div class="tracking-step-line pending"></div>
+              </div>
+              <div class="tracking-step-content">
+                <p class="tracking-step-title">Customs Cleared</p>
+                <div class="tracking-step-meta">
+                  <span class="tracking-step-meta-item">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                    Los Angeles, US
+                  </span>
+                  <span class="tracking-step-meta-item">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                    Feb 25, 8:20 AM
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Step 4 - Pending -->
+            <div class="tracking-step">
+              <div class="tracking-step-indicator">
+                <div class="tracking-step-dot pending">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16.5 9.4 7.55 4.24"/><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.29 7 12 12 20.71 7"/><line x1="12" x2="12" y1="22" y2="12"/></svg>
+                </div>
+              </div>
+              <div class="tracking-step-content">
+                <p class="tracking-step-title">Out for Delivery</p>
+                <div class="tracking-step-meta">
+                  <span class="tracking-step-meta-item">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                    Dallas, TX
+                  </span>
+                  <span class="tracking-step-meta-item">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                    Feb 26, 11:05 AM
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════ TESTIMONIALS ═══════ -->
+    <section class="testimonials">
+      <div class="container">
+        <div class="testimonials-header">
+          <p class="section-label">Testimonials</p>
+          <h2 class="section-title text-balance">Trusted by industry leaders</h2>
+        </div>
+
+        <div class="testimonials-grid">
+          <div class="testimonial-card">
+            <div>
+              <div class="testimonial-stars">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              </div>
+              <p class="testimonial-quote">"Apex reduced our shipping costs by 23% while improving delivery times. Their analytics platform gives us visibility we never had before."</p>
+            </div>
+            <div class="testimonial-footer">
+              <p class="testimonial-author">Sarah Chen</p>
+              <p class="testimonial-role">VP of Operations, TechNova Inc.</p>
+            </div>
+          </div>
+
+          <div class="testimonial-card">
+            <div>
+              <div class="testimonial-stars">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              </div>
+              <p class="testimonial-quote">"We switched to Apex for our international freight and haven't looked back. Their customs brokerage team is phenomenal."</p>
+            </div>
+            <div class="testimonial-footer">
+              <p class="testimonial-author">Marcus Williams</p>
+              <p class="testimonial-role">Supply Chain Director, GreenLeaf Consumer Goods</p>
+            </div>
+          </div>
+
+          <div class="testimonial-card">
+            <div>
+              <div class="testimonial-stars">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              </div>
+              <p class="testimonial-quote">"The dedicated account management and 24/7 support have made Apex an indispensable partner for our e-commerce fulfillment."</p>
+            </div>
+            <div class="testimonial-footer">
+              <p class="testimonial-author">Priya Sharma</p>
+              <p class="testimonial-role">Head of Logistics, Meridian Retail Group</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════ CTA ═══════ -->
+    <section class="cta" id="contact">
+      <div class="container">
+        <div class="cta-card">
+          <div class="cta-glow-1"></div>
+          <div class="cta-glow-2"></div>
+
+          <div class="cta-inner">
+            <h2 class="cta-title text-balance">Ready to optimize your supply chain?</h2>
+            <p class="cta-desc">Get a custom quote in under 24 hours. Our logistics experts will design a solution tailored to your business needs.</p>
+
+            <div class="cta-buttons">
+              <button class="btn btn-accent btn-lg">
+                Request a Quote
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+              </button>
+              <button class="btn btn-outline btn-lg">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                Call 1-800-APEX
+              </button>
+            </div>
+
+            <p class="cta-note">No commitment required. Free consultation for enterprise accounts.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ═══════ FOOTER ═══════ -->
+  <footer class="footer" role="contentinfo">
+    <div class="container footer-inner">
+      <div class="footer-grid">
+        <div>
+          <a href="/" class="navbar-brand" aria-label="Apex Logistics home">
+            <div class="navbar-logo">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16.5 9.4 7.55 4.24"/><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.29 7 12 12 20.71 7"/><line x1="12" x2="12" y1="22" y2="12"/></svg>
+            </div>
+            <span class="navbar-brand-text">APEX</span>
+          </a>
+          <p class="footer-brand-desc">
+            Global logistics and supply chain solutions trusted by enterprises
+            since 1997. Moving the world forward, one shipment at a time.
+          </p>
+        </div>
+
+        <div>
+          <p class="footer-col-title">Solutions</p>
+          <ul class="footer-col-list">
+            <li><a href="#">Freight Forwarding</a></li>
+            <li><a href="#">Warehousing</a></li>
+            <li><a href="#">Ocean Freight</a></li>
+            <li><a href="#">Air Freight</a></li>
+            <li><a href="#">Express Delivery</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <p class="footer-col-title">Company</p>
+          <ul class="footer-col-list">
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Careers</a></li>
+            <li><a href="#">Press</a></li>
+            <li><a href="#">Partners</a></li>
+            <li><a href="#">Sustainability</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <p class="footer-col-title">Resources</p>
+          <ul class="footer-col-list">
+            <li><a href="#">Blog</a></li>
+            <li><a href="#">Case Studies</a></li>
+            <li><a href="#">API Docs</a></li>
+            <li><a href="#">Help Center</a></li>
+            <li><a href="#">Status</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <p class="footer-col-title">Legal</p>
+          <ul class="footer-col-list">
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Terms of Service</a></li>
+            <li><a href="#">Cookie Policy</a></li>
+            <li><a href="#">Compliance</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p class="footer-bottom-text">2026 Apex Logistics. All rights reserved.</p>
+        <div class="footer-bottom-links">
+          <a href="#">Privacy</a>
+          <a href="#">Terms</a>
+          <a href="#">Cookies</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ═══════ JavaScript ═══════ -->
+  <script>
+    // Mobile menu toggle
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const hamburgerOpen = document.getElementById('hamburger-open');
+    const hamburgerClose = document.getElementById('hamburger-close');
+
+    hamburger.addEventListener('click', () => {
+      const isOpen = mobileMenu.classList.toggle('open');
+      hamburgerOpen.style.display = isOpen ? 'none' : 'block';
+      hamburgerClose.style.display = isOpen ? 'block' : 'none';
+      hamburger.setAttribute('aria-expanded', isOpen);
+    });
+
+    // Close mobile menu on link click
+    mobileMenu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.remove('open');
+        hamburgerOpen.style.display = 'block';
+        hamburgerClose.style.display = 'none';
+        hamburger.setAttribute('aria-expanded', 'false');
+      });
+    });
+
+    // Tracking form
+    const trackBtn = document.getElementById('track-btn');
+    const trackingResult = document.getElementById('tracking-result');
+
+    trackBtn.addEventListener('click', () => {
+      trackingResult.classList.add('visible');
+    });
+
+    // Also trigger on Enter key
+    document.getElementById('tracking-input').addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        trackingResult.classList.add('visible');
+      }
+    });
+  </script>
+</body>
+</html>
